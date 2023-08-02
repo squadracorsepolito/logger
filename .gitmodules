@@ -1,0 +1,6 @@
+[submodule "Lib/stm32-cmake"]
+	path = Lib/stm32-cmake
+	url = https://github.com/ObKo/stm32-cmake.git
+[submodule "Lib/SCan"]
+	path = Lib/SCan
+	url = https://github.com/squadracorsepolito/SCan.git
