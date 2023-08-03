@@ -29,7 +29,7 @@ CAN_RX_HEX_ID=
 
 
 # Handy aliases
-TARGET = $(PROJECT_NAME)
+TARGET = SCanner
 
 #######################################
 # all - default action

@@ -19,14 +19,18 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#include "can.h"
 #include "dma.h"
 #include "gpio.h"
 #include "lwip.h"
+#include "rtc.h"
 #include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "debug.h"
 #include "pipo/shell.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,16 +61,16 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int __io_putchar(int ch) {
-    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
-    return ch;
-}
-
-int __io_getchar(void) {
-    uint8_t ch = 0;
-    HAL_UART_Receive(&huart3, &ch, 1, HAL_MAX_DELAY);
-    return ch;
-}
+//int __io_putchar(int ch) {
+//    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+//    return ch;
+//}
+//
+//int __io_getchar(void) {
+//    uint8_t ch = 0;
+//    HAL_UART_Receive(&huart3, &ch, 1, HAL_MAX_DELAY);
+//    return ch;
+//}
 
 shell_t _shell;
 uint8_t _uart;
@@ -133,20 +137,24 @@ int main(void) {
     MX_DMA_Init();
     MX_USART3_UART_Init();
     MX_LWIP_Init();
+    MX_CAN1_Init();
+    MX_RTC_Init();
     /* USER CODE BEGIN 2 */
-    shell_init(&_shell);
+    DBG_init();
+    //shell_init(&_shell);
     _shell.commands      = _shell_commands;
     _shell.commands_size = sizeof(_shell_commands) / sizeof(_shell_commands[0]);
 
-    printf("\r\n~~ piposhell ~~\r\n");
-    shell_print_prompt(&_shell);
+    //printf("\r\n~~ piposhell ~~\r\n");
+    //shell_print_prompt(&_shell);
 
-    HAL_UART_Receive_DMA(&huart3, &_uart, 1);
+    //HAL_UART_Receive_DMA(&huart3, &_uart, 1);
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1) {
+        DBG_routine();
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
@@ -175,8 +183,9 @@ void SystemClock_Config(void) {
     /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSEState       = RCC_HSE_BYPASS;
+    RCC_OscInitStruct.LSIState       = RCC_LSI_ON;
     RCC_OscInitStruct.PLL.PLLState   = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource  = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLM       = 4;

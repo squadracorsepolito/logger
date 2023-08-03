@@ -64,10 +64,11 @@ set(PROJECT_INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/LwIP/src/include/compat/stdc
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/LwIP/system/arch
 #${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Include
-    #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/ 
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/ 
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/logger
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/critical_section
     #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/timer_utils
     #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/timebase
-    #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/critical_section
 
 )
 
@@ -78,9 +79,10 @@ file(GLOB_RECURSE PROJECT_C_SOURCES FOLLOW_SYMLINKS
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/BSP/Components/lan8742/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/LWIP/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/LwIP/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/logger/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/critical_section/*.c
     #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/timebase/*.c
     #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/timer_utils/*.c
-    #${CMAKE_CURRENT_SOURCE_DIR}/Lib/stmlibs/critical_section/*.c
 )
 
 # Get asm sources via globbing search
@@ -161,6 +163,8 @@ target_link_libraries(${EXECUTABLE_TARGET}
     HAL::STM32::F7::GPIO
     HAL::STM32::F7::RCC
     HAL::STM32::F7::RCCEx
+    HAL::STM32::F7::RTC
+    HAL::STM32::F7::RTCEx
     HAL::STM32::F7::TIM
     HAL::STM32::F7::TIMEx
     HAL::STM32::F7::UART

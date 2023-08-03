@@ -101,6 +101,7 @@ void Error_Handler(void);
 #define LD2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define DBG_HUART huart3
 
 /* USER CODE END Private defines */
 
