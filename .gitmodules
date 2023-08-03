@@ -4,3 +4,6 @@
 [submodule "Lib/SCan"]
 	path = Lib/SCan
 	url = https://github.com/squadracorsepolito/SCan.git
+[submodule "Lib/stmlibs"]
+	path = Lib/stmlibs
+	url = https://github.com/squadracorsepolito/stmlibs.git
