@@ -269,7 +269,7 @@ CXXFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32F767ZITx_FLASH.ld
+LDSCRIPT = STM32F767ZITx_FLASH_ethernet.ld
 
 # libraries
 LIBS = -lc -lm -lnosys 

@@ -63,8 +63,6 @@ MEMORY
 {
 RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 512K
 FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 2048K
-Memory_B1(xrw)   : ORIGIN = 0x2007C000, LENGTH = 0xA0
-Memory_B2(xrw)   : ORIGIN = 0x2007C0A0, LENGTH = 0xA0
 }
 
 /* Define output sections */
@@ -186,8 +184,6 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-  .RxDecripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
-  .TxDescripSection (NOLOAD) : { *(.DMATxDscrTab_section) } >Memory_B2
 }
 
 

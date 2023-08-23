@@ -237,6 +237,7 @@ static void low_level_init(struct netif *netif)
 /* USER CODE BEGIN LOW_LEVEL_INIT */
 
 /* USER CODE END LOW_LEVEL_INIT */
+
 }
 
 /**
